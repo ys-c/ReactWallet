@@ -1,0 +1,22 @@
+.header {
+    padding: 50px;
+    text-align: center;
+    background: #2F4F4F;
+    color: white;
+    font-size: 20px;
+}
+
+.login-container {
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.login-text-container{
+    color: red;
+    padding:5px;
+    font-size:20px;
+    background-color:grey;
+    color:#ffffff;
+
+}
