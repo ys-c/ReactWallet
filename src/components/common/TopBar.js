@@ -2,7 +2,7 @@ import './styles.css'
 const TopBar = (props) => {
     const banner= props.banner;
     return(
-        <div className="header">
+        <div className="top-bar">
             <h1>{banner}</h1>
         </div>
 
