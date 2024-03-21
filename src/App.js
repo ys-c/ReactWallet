@@ -1,7 +1,6 @@
 import './App.css';
 import Login from './components/Login';
-import TopBar from './components/common/TopBar';
-import BottomBar from './components/common/BottomBar';
+import AddTransaction from './components/AddTransaction';
 
 function App() {
   return (
@@ -9,6 +8,8 @@ function App() {
       {/* <h1> App level </h1> */}
       {/* <TopBar banner="ReactWallet" /> */}
       <Login/>
+      {/* <AddTransaction/> */}
+      
       
     </div>
   );

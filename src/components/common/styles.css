@@ -6,28 +6,36 @@
     font-size: 20px;
 }
 
-.login-container {
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
+.middle-main-container {
+
+    width: 100%;
+    position: relative;
+
+}
+
+.center {
+    justify-content: center;
+    text-align: center;
+
+
 }
 
 .login-text-container {
-     /* height and width wets the actual dimensons of the div */
-    height: 200px; 
-    width: 200px;
-   /* marigin aligns the div to the middle of the screen*/
+    /* height and width sets the actual dimensons of the div */
+    height: 250px;
+    width: 300px;
+    /* marigin aligns the div to the middle of the screen*/
     margin: auto;
     text-align: center;
+    /* styles for the background of textfield */
     background-color: #9196a3;
     color: #ffffff;
     padding: 5px 13px 5px;
     border-radius: 25px;
+
 }
 
-.bottom-bar{
+.bottom-bar {
     position: absolute;
     bottom: 0px;
     background: #2F4F4F;
@@ -35,13 +43,29 @@
     width: 100%;
     margin: auto;
     text-align: center;
-    
+
 }
-.bottom-bar-button{
+
+.bottom-bar-button {
     width: 33%;
     text-align: center;
     outline-style: solid;
     outline-color: #ffffff;
 
-    
+
+}
+
+.add-transcation-container {
+    /* height and width wets the actual dimensons of the div */
+    height: 400px;
+    width: 400px;
+    /* margin aligns the div to the middle of the screen*/
+    margin-top:3%;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+    background-color: #9196a3;
+    color: #ffffff;
+    padding: 5px 13px 5px;
+    border-radius: 25px;
 }
