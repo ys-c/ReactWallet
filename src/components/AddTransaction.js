@@ -1,11 +1,17 @@
 import TopBar from "./common/TopBar";
-import {Input,Select,Option,FormControl,FormLabel, Button } from '@mui/joy';
 import {useState} from 'react';
+import {useNavigate } from "react-router-dom"
+import {Input,Select,Option,FormControl,FormLabel, Button } from '@mui/joy';
 const AddTransaction = () => {
     const [amount, setAmount] = useState('');
     const [category, setCategory] = useState('');
     const [date, setDate] = useState('');
     const [notes, setNotes] = useState('');
+    
+    const navigate = useNavigate();
+    const goBack= ()=>{
+       navigate("/home");
+    }
     return (
         <div>
             <TopBar banner="Add Transaction" />
@@ -32,6 +38,7 @@ const AddTransaction = () => {
                         <Option value="Shopping"> Shopping</Option>
                         <Option value="Transport"> Transport</Option>
                         <Option value="Personal Care"> Personal Care</Option>
+                        <Option value="Income"> Income</Option>
                     </Select>
                     <FormLabel sx={{mt: 2}}>Transaction Date: </FormLabel>
                     <Input
@@ -52,7 +59,7 @@ const AddTransaction = () => {
                     </Input>
                 </FormControl>
                 <Button size="lg" variant="solid" sx={{m: 2}} >Save</Button>
-                <Button size="lg" variant="solid" sx={{m: 2}}>Cancel</Button>
+                <Button size="lg" variant="solid" sx={{m: 2}} onClick={()=>goBack()}>Cancel</Button>
 
 
             </div>

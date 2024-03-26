@@ -1,14 +1,18 @@
 import TopBar from './common/TopBar';
 import './common/styles.css'
 import { useState } from 'react';
+import {useNavigate } from "react-router-dom"
 import { Button, FormControl, Input, FormLabel} from '@mui/joy';
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const authenicateUser = () =>{
+        navigate("/home");
+    }
     return (
         <div>
             <TopBar banner="ReactWallet" />
-            <div className="middle-main-container">
                 <div className='center'>
                     <img src={require('./common/icons/logo.png')} width={250} height={250} alt="walletLogo" />
                 </div>
@@ -35,11 +39,10 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </FormControl>
-                    <Button size="lg" variant="solid" sx={{m:2}}>Login</Button>
+                    <Button size="lg" variant="solid" sx={{m:2}} onClick={()=> authenicateUser() }>Login</Button>
                 </div>
 
             </div>
-        </div>
     );
 }
 export default Login;

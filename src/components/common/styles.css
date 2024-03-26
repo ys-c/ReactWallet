@@ -1,25 +1,28 @@
-.top-bar {
-    padding: 40px;
-    text-align: center;
-    background: #2F4F4F;
-    color: white;
-    font-size: 20px;
-}
-
-.middle-main-container {
-
-    width: 100%;
-    position: relative;
-
-}
-
+/* Common Styles */
 .center {
     justify-content: center;
     text-align: center;
-
-
 }
 
+/* Error Page Styles */
+.error-page-container{
+    /* positioning */
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    /* height and width sets the actual dimensons of the div */
+    height: 400px;
+    width: 800px;
+    /* styling */
+    background-color: #9196a3;
+    border-radius: 10px;
+    /* text style */
+    font-size: 50px;
+    text-align: center;
+    font-family: monospace;
+}
+
+/* Login page styles */
 .login-text-container {
     /* height and width sets the actual dimensons of the div */
     height: 250px;
@@ -35,15 +38,25 @@
 
 }
 
+/* Top Bar styles */
+.top-bar {
+    position: sticky;
+    padding: 25px;
+    text-align: center;
+    background: #2F4F4F;
+    color: white;
+    font-size: 20px;
+}
+
+/* Bottom Bar styles */
 .bottom-bar {
-    position: absolute;
+    position: fixed;
     bottom: 0px;
     background: #2F4F4F;
     color: #ffffff;
     width: 100%;
     margin: auto;
     text-align: center;
-
 }
 
 .bottom-bar-button {
@@ -51,21 +64,63 @@
     text-align: center;
     outline-style: solid;
     outline-color: #ffffff;
-
-
 }
 
+/* Add transcation page Styles */
 .add-transcation-container {
-    /* height and width wets the actual dimensons of the div */
+    /* height and width sets the actual dimensons of the div */
     height: 400px;
     width: 400px;
     /* margin aligns the div to the middle of the screen*/
-    margin-top:3%;
-    margin-left:auto;
-    margin-right:auto;
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
     background-color: #9196a3;
     color: #ffffff;
     padding: 5px 13px 5px;
     border-radius: 25px;
+}
+
+/* Transcation item Styles */
+.transaction-item-container {
+    /* height and width sets the actual dimensons of the div */
+    height: 200px;
+    width: 100%;
+    background-color: #9196a3;
+    border-radius: 10px;
+    display: flex;
+
+}
+
+.transcation-item-inner-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+}
+
+
+#category-icon{
+   border-style: solid;
+    /* item will not shrink when the webpage is resized */
+    flex-shrink: 0;
+
+}
+#category-name{
+    border-style: solid;
+    height: 50%;
+    
+
+}
+#notes{
+    border-style: solid;
+    height: 50%;
+   
+    
+}
+#amount{
+    border-style: solid;
+    /* item will not shrink when the webpage is resized */
+    flex-shrink: 0;
 }
