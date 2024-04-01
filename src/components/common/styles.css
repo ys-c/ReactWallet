@@ -5,7 +5,7 @@
 }
 
 /* Error Page Styles */
-.error-page-container{
+.error-page-container {
     /* positioning */
     margin-top: 10%;
     margin-left: auto;
@@ -66,6 +66,8 @@
     outline-color: #ffffff;
 }
 
+
+
 /* Add transcation page Styles */
 .add-transcation-container {
     /* height and width sets the actual dimensons of the div */
@@ -86,41 +88,85 @@
 .transaction-item-container {
     /* height and width sets the actual dimensons of the div */
     height: 200px;
-    width: 100%;
+    width: 50%;
     background-color: #9196a3;
-    border-radius: 10px;
+    border-radius: 17px;
     display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
 
 }
 
-.transcation-item-inner-container {
+#category-icon-container {
+  
+    /* item will not shrink when the webpage is resized */
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
     display: flex;
+    padding-left: 15px;
+   
+}
+
+.transcation-item-middle-container {
     flex-direction: column;
     flex-grow: 1;
-
+    padding-left: 10px;
 }
 
-
-#category-icon{
-   border-style: solid;
-    /* item will not shrink when the webpage is resized */
-    flex-shrink: 0;
-
-}
-#category-name{
-    border-style: solid;
+#category-name {
     height: 50%;
+    font-size: 30px;
+    color: white;
+    font-weight: 700;
+    margin-top: 30px;
+    /* border-style: solid; */
     
-
-}
-#notes{
-    border-style: solid;
-    height: 50%;
-   
     
 }
-#amount{
-    border-style: solid;
+
+#notes {
+    height: 50%;
+    font-size: 25px;
+    /* border-style: solid; */
+}
+
+
+.transcation-item-right-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+#amount-container {
     /* item will not shrink when the webpage is resized */
-    flex-shrink: 0;
+    flex-shrink: 1;
+    height: 50%;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 20px;
+    margin-right: 7px;
+    font-weight: 500;
+    
+}
+
+.amount-red {
+    color: red;
+
+
+}
+
+.amount-green {
+    color: green;
+
+}
+
+
+
+#edit-button-container {
+    display: flex;
+    height: 50%;
+    margin-left: 50px;
+    
 }

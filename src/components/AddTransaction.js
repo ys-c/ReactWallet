@@ -2,13 +2,24 @@ import TopBar from "./common/TopBar";
 import {useState} from 'react';
 import {useNavigate } from "react-router-dom"
 import {Input,Select,Option,FormControl,FormLabel, Button } from '@mui/joy';
+import { createTransactionItem } from "../api";
 const AddTransaction = () => {
-    const [amount, setAmount] = useState('');
-    const [category, setCategory] = useState('');
-    const [date, setDate] = useState('');
-    const [notes, setNotes] = useState('');
-    
+    const [transactionDetails, setTransactionDetails] = useState([{amount:'', type:'', category:'test',date:'',notes:'' }]);
     const navigate = useNavigate();
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        console.log("submit pressed"); 
+        console.log(transactionDetails);
+    }
+    
+      const handleFormChange = (e) =>{
+        let data = transactionDetails;
+        console.log(e.target.value);
+        data[e.target.name] = e.target.value;
+        setTransactionDetails(data);
+        
+    }
+    
     const goBack= ()=>{
        navigate("/home");
     }
@@ -20,19 +31,24 @@ const AddTransaction = () => {
                     <FormLabel sx={{mt: 1}}>Amount: </FormLabel>
                     <Input size="lg"
                         type="number"
+                        name="amount"
                         placeholder="Amount"
                         startDecorator={'SGD$'}
                         variant="soft"
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
+                        value={transactionDetails.amount}
+                        onChange={(e) => handleFormChange(e)}
                         required>
                     </Input>
+                    </FormControl >
+                    <FormControl>
                     <FormLabel sx={{mt: 2}}>Category: </FormLabel>
                     <Select
                         size="lg"
                         placeholder="Select Category..."
                         variant="soft"
-                        onChange={(e) => setCategory(e.target.value)}
+                        name="category"
+                        value={transactionDetails.category}
+                        onChange={(e) => handleFormChange(e)}
                         required>
                         <Option value="Food"> Food</Option>
                         <Option value="Shopping"> Shopping</Option>
@@ -40,25 +56,32 @@ const AddTransaction = () => {
                         <Option value="Personal Care"> Personal Care</Option>
                         <Option value="Income"> Income</Option>
                     </Select>
+                    </FormControl>
+                    <FormControl>
                     <FormLabel sx={{mt: 2}}>Transaction Date: </FormLabel>
                     <Input
                         size="lg"
                         type="date"
                         variant="soft"
-                        onChange={(e) => setDate(e.target.value)}
+                        name="date"
+                        value={transactionDetails.date}
+                        onChange={(e) => handleFormChange(e)}
                         required>
                     </Input>
+                    </FormControl>
+                    <FormControl>
                     <FormLabel sx={{mt: 2}}>Transaction Notes: </FormLabel>
                     <Input
                         size="lg"
                         type="text"
                         placeholder="notes"
-                        value={notes}
-                        onChange={(e) => setNotes(e.target.value)}
+                        name="notes"
+                        value={transactionDetails.notes}
+                        onChange={(e) => handleFormChange(e)}
                         variant="soft">
                     </Input>
                 </FormControl>
-                <Button size="lg" variant="solid" sx={{m: 2}} >Save</Button>
+                <Button size="lg" variant="solid" sx={{m: 2}} onClick={(e)=>handleSubmit(e)}>Save</Button>
                 <Button size="lg" variant="solid" sx={{m: 2}} onClick={()=>goBack()}>Cancel</Button>
 
 
