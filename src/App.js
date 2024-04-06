@@ -27,7 +27,7 @@ function App() {
                     />
                     <Route
                         path="/addtransaction"
-                        element={<AddTransaction />}
+                        element={<AddTransaction/>}
                     />
                     <Route
                         path="*"

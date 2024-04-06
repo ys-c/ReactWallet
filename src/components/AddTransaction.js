@@ -1,24 +1,38 @@
 import TopBar from "./common/TopBar";
 import {useState} from 'react';
 import {useNavigate } from "react-router-dom"
-import {Input,Select,Option,FormControl,FormLabel, Button } from '@mui/joy';
+import {Input,Select,Option,FormControl,FormLabel, Button, MenuItem } from '@mui/joy';
 import { createTransactionItem } from "../api";
 const AddTransaction = () => {
-    const [transactionDetails, setTransactionDetails] = useState([{amount:'', type:'', category:'test',date:'',notes:'' }]);
+    const [transactionDetails, setTransactionDetails] = useState([{amount:'', category:'',date:'',notes:'' }]);
     const navigate = useNavigate();
     const handleSubmit = (e) =>{
         e.preventDefault();
         console.log("submit pressed"); 
+        if(transactionDetails[0].amount === "" || transactionDetails[0].category === "" || transactionDetails[0].date === "")
+        {
+            console.log("required not fill up");
+        }
         console.log(transactionDetails);
+        
     }
     
       const handleFormChange = (e) =>{
         let data = transactionDetails;
+        console.log(e.target.name );
         console.log(e.target.value);
         data[e.target.name] = e.target.value;
         setTransactionDetails(data);
         
     }
+
+    const handleSelectChange =(e,newValue) =>{
+        console.log("newValue", newValue);
+        let data = transactionDetails;
+        data["category"] = newValue;
+        setTransactionDetails(data);
+
+};
     
     const goBack= ()=>{
        navigate("/home");
@@ -31,6 +45,10 @@ const AddTransaction = () => {
                     <FormLabel sx={{mt: 1}}>Amount: </FormLabel>
                     <Input size="lg"
                         type="number"
+                        slotProps={{
+                            input: {
+                              min: 0
+                            },}}
                         name="amount"
                         placeholder="Amount"
                         startDecorator={'SGD$'}
@@ -40,7 +58,7 @@ const AddTransaction = () => {
                         required>
                     </Input>
                     </FormControl >
-                    <FormControl>
+                    <FormControl >
                     <FormLabel sx={{mt: 2}}>Category: </FormLabel>
                     <Select
                         size="lg"
@@ -48,15 +66,14 @@ const AddTransaction = () => {
                         variant="soft"
                         name="category"
                         value={transactionDetails.category}
-                        onChange={(e) => handleFormChange(e)}
                         required>
-                        <Option value="Food"> Food</Option>
-                        <Option value="Shopping"> Shopping</Option>
-                        <Option value="Transport"> Transport</Option>
-                        <Option value="Personal Care"> Personal Care</Option>
-                        <Option value="Income"> Income</Option>
+                        <Option value="Food" onClick={(e) => handleSelectChange(e, "Food")}> Food</Option>
+                        <Option value="Shopping" onClick={(e) => handleSelectChange(e, "Shopping")}> Shopping</Option>
+                        <Option value="Transport" onClick={(e) => handleSelectChange(e, "Transport")}> Transport</Option>
+                        <Option value="Personal Care" onClick={(e) => handleSelectChange(e, "Personal Care")}> Personal Care</Option>
+                        <Option value="Income" onClick={(e) => handleSelectChange(e, "Income")}> Income</Option>
                     </Select>
-                    </FormControl>
+                    </FormControl >
                     <FormControl>
                     <FormLabel sx={{mt: 2}}>Transaction Date: </FormLabel>
                     <Input
