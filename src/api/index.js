@@ -15,3 +15,6 @@ axios.put(`${TRANSACTION_ITEM_ENDPOINT}/${transaction_id}`, payload);
 
 export const deleteTransactionItembyId = (transaction_id ) =>
 axios.put(`${TRANSACTION_ITEM_ENDPOINT}/${transaction_id}`);
+
+export const getTotalBalance = () =>
+axios.get(`${TRANSACTION_ITEM_ENDPOINT}/balance`);

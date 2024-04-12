@@ -1,5 +1,6 @@
 import './styles.css'
 import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 const TransactionItem = (props) => {
     const transactionDetails = props.transactionDetails;
     // console.log("item:", transactionDetails);
@@ -7,6 +8,11 @@ const TransactionItem = (props) => {
     let notes = transactionDetails.notes;
     let amount = transactionDetails.amount;
     let type = transactionDetails.type;
+    const navigate = useNavigate();
+    const goEdit = () => {
+        console.log("here");
+        navigate("/edittransaction");
+    }
 
     const categoryDisplay = (category) => {
         switch (category) {
@@ -47,7 +53,8 @@ const TransactionItem = (props) => {
                         }
                     </div>
                     <div id='edit-button-container'>
-                        <Button>
+                        <Button
+                        onClick={()=>goEdit()} >
                             <img src={require('./icons/edit-button.png')} width={20} height={20} alt="edit" />
                         </Button>
                     </div>

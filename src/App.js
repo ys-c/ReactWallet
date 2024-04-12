@@ -3,12 +3,13 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
 } from "react-router-dom";
 import Login from './components/Login';
 import HomePage from './components/HomePage';
 import AddTransaction from './components/AddTransaction';
+import EditTransaction from './components/EditTransaction';
 import ErrorPage from './components/ErrorPage';
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -30,12 +31,17 @@ function App() {
                         element={<AddTransaction/>}
                     />
                     <Route
+                        path="/edittransaction"
+                        element={<EditTransaction/>}
+                    />
+                    <Route
                         path="*"
                         // element={<Navigate to="/" />}
                         element={<ErrorPage/>}
                     />
                 </Routes>
             </Router>
+            <ToastContainer/>
       
       
       

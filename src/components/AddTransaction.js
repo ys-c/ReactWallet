@@ -1,27 +1,61 @@
 import TopBar from "./common/TopBar";
 import {useState} from 'react';
 import {useNavigate } from "react-router-dom"
-import {Input,Select,Option,FormControl,FormLabel, Button, MenuItem } from '@mui/joy';
+import {Input,Select,Option,FormControl,FormLabel, Button } from '@mui/joy';
 import { createTransactionItem } from "../api";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 const AddTransaction = () => {
-    const [transactionDetails, setTransactionDetails] = useState([{amount:'', category:'',date:'',notes:'' }]);
+    const [transactionDetails, setTransactionDetails] = useState([{amount:'', category:'',transaction_date:'',notes:'', type:'', username:'',transaction_id:''}]);
     const navigate = useNavigate();
     const handleSubmit = (e) =>{
         e.preventDefault();
         console.log("submit pressed"); 
-        if(transactionDetails[0].amount === "" || transactionDetails[0].category === "" || transactionDetails[0].date === "")
+        if(transactionDetails[0].amount === "" || transactionDetails[0].category === "" || transactionDetails[0].transaction_date === "")
         {
-            console.log("required not fill up");
+
+            if(transactionDetails[0].amount === "" )
+            {
+                toast.error ("Amount is required");
+
+            }
+            if(transactionDetails[0].category === "" )
+            {
+                toast.error ("Category is required");
+                
+            }
+            if(transactionDetails[0].transaction_date === "" )
+            {
+                toast.error ("Date of transaction is required");
+            }     
         }
+        else{
+        var type = assignType(transactionDetails[0].category);
+        let data = transactionDetails;
+        data[0]["type"] = type;
+        setTransactionDetails(data);
         console.log(transactionDetails);
+        createTransactionItem(transactionDetails[0])
+        .then(()=>  successCreation()
         
+    )
+        .catch((err) => {
+            toast.error(err);
+        });
+    }
+        
+    }
+    const successCreation =()=>
+    {
+        toast.success("transaction saved!!")
+        navigate("/home");
     }
     
       const handleFormChange = (e) =>{
         let data = transactionDetails;
         console.log(e.target.name );
         console.log(e.target.value);
-        data[e.target.name] = e.target.value;
+        data[0][e.target.name] = e.target.value;
         setTransactionDetails(data);
         
     }
@@ -29,17 +63,33 @@ const AddTransaction = () => {
     const handleSelectChange =(e,newValue) =>{
         console.log("newValue", newValue);
         let data = transactionDetails;
-        data["category"] = newValue;
+        data[0]["category"] = newValue;
         setTransactionDetails(data);
 
-};
-    
+}
     const goBack= ()=>{
        navigate("/home");
     }
+    const assignType =(category)=>{
+        switch (category) {
+            case 'Food':
+                return "expenses";
+            case 'Shopping':
+                return "expenses";
+            case 'Transport':
+                return "expenses";
+            case 'Personal Care':
+                return "expenses";
+            case 'Income':
+                return "income";
+            default:
+                return category;
+        }
+    }
+
     return (
         <div>
-            <TopBar banner="Add Transaction" />
+            <TopBar banner="Add Transaction" showAmount ="false" />
             <div className="add-transcation-container">
                 <FormControl >
                     <FormLabel sx={{mt: 1}}>Amount: </FormLabel>
@@ -80,8 +130,8 @@ const AddTransaction = () => {
                         size="lg"
                         type="date"
                         variant="soft"
-                        name="date"
-                        value={transactionDetails.date}
+                        name="transaction_date"
+                        value={transactionDetails.transaction_date}
                         onChange={(e) => handleFormChange(e)}
                         required>
                     </Input>
