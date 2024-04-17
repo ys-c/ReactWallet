@@ -1,7 +1,7 @@
 import TopBar from "./common/TopBar";
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom"
-import { Input, Select, Option, FormControl, FormLabel, Button, MenuItem } from '@mui/joy';
+import { Input, Select, Option, FormControl, FormLabel, Button } from '@mui/joy';
 
 const EditTransaction = () => {
     const [transactionDetails, setTransactionDetails] = useState([{ amount: '', category: '', date: '', notes: '' }]);

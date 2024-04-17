@@ -18,3 +18,6 @@ axios.put(`${TRANSACTION_ITEM_ENDPOINT}/${transaction_id}`);
 
 export const getTotalBalance = () =>
 axios.get(`${TRANSACTION_ITEM_ENDPOINT}/balance`);
+
+export const getAllCategoryExpenses = () =>
+axios.get(`${TRANSACTION_ITEM_ENDPOINT}/categoryexp`);
