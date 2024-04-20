@@ -2,6 +2,8 @@ import TopBar from "./common/TopBar";
 import {useState} from 'react';
 import {useNavigate } from "react-router-dom"
 import {Input,Select,Option,FormControl,FormLabel, Button } from '@mui/joy';
+import CategoryType from "./common/CategoryType";
+import CategoryNameList from "./common/CategoryNameList";
 import { createTransactionItem } from "../api";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -30,7 +32,7 @@ const AddTransaction = () => {
             }     
         }
         else{
-        var type = assignType(transactionDetails[0].category);
+        var type = CategoryType(transactionDetails[0].category);
         let data = transactionDetails;
         data[0]["type"] = type;
         setTransactionDetails(data);
@@ -70,22 +72,6 @@ const AddTransaction = () => {
     const goBack= ()=>{
        navigate("/home");
     }
-    const assignType =(category)=>{
-        switch (category) {
-            case 'Food':
-                return "expenses";
-            case 'Shopping':
-                return "expenses";
-            case 'Transport':
-                return "expenses";
-            case 'Personal Care':
-                return "expenses";
-            case 'Income':
-                return "income";
-            default:
-                return category;
-        }
-    }
 
     return (
         <div>
@@ -117,11 +103,10 @@ const AddTransaction = () => {
                         name="category"
                         value={transactionDetails.category}
                         required>
-                        <Option value="Food" onClick={(e) => handleSelectChange(e, "Food")}> Food</Option>
-                        <Option value="Shopping" onClick={(e) => handleSelectChange(e, "Shopping")}> Shopping</Option>
-                        <Option value="Transport" onClick={(e) => handleSelectChange(e, "Transport")}> Transport</Option>
-                        <Option value="Personal Care" onClick={(e) => handleSelectChange(e, "Personal Care")}> Personal Care</Option>
-                        <Option value="Income" onClick={(e) => handleSelectChange(e, "Income")}> Income</Option>
+                        {CategoryNameList.map((categoryName)=> (
+                             <Option value={categoryName} onClick={(e) => handleSelectChange(e, categoryName)}> {categoryName}</Option>
+
+                        ))}
                     </Select>
                     </FormControl >
                     <FormControl>

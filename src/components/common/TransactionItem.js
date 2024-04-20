@@ -8,9 +8,10 @@ const TransactionItem = (props) => {
     let notes = transactionDetails.notes;
     let amount = transactionDetails.amount;
     let type = transactionDetails.type;
+    const data= {id: transactionDetails.transaction_id};
     const navigate = useNavigate();
     const goEdit = () => {
-        navigate("/edittransaction");
+        navigate("/edittransaction", {state: data});
     }
 
     return (
@@ -47,10 +48,4 @@ const TransactionItem = (props) => {
     );
 
 }
-
-// category photo
-// category name
-// notes if have
-// amount
-
 export default TransactionItem;

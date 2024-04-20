@@ -14,10 +14,13 @@ axios.put(`${TRANSACTION_ITEM_ENDPOINT}/${transaction_id}`, payload);
 
 
 export const deleteTransactionItembyId = (transaction_id ) =>
-axios.put(`${TRANSACTION_ITEM_ENDPOINT}/${transaction_id}`);
+axios.delete(`${TRANSACTION_ITEM_ENDPOINT}/${transaction_id}`);
 
 export const getTotalBalance = () =>
 axios.get(`${TRANSACTION_ITEM_ENDPOINT}/balance`);
 
 export const getAllCategoryExpenses = () =>
 axios.get(`${TRANSACTION_ITEM_ENDPOINT}/categoryexp`);
+
+export const getTransactionItemById = (transaction_id)=>
+axios.get(`${TRANSACTION_ITEM_ENDPOINT}/${transaction_id}`);

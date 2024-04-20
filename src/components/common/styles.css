@@ -224,3 +224,19 @@
     padding-left: 10px;
     font-weight: 500;
 }
+
+/* EditTransaction Page Styles */
+.edit-transcation-container {
+    /* height and width sets the actual dimensons of the div */
+    height: 450px;
+    width: 400px;
+    /* margin aligns the div to the middle of the screen*/
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: #9196a3;
+    color: #ffffff;
+    padding: 5px 13px 5px;
+    border-radius: 25px;
+}

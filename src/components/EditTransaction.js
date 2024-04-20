@@ -1,44 +1,118 @@
 import TopBar from "./common/TopBar";
-import { useState } from 'react';
-import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation} from "react-router-dom"
 import { Input, Select, Option, FormControl, FormLabel, Button } from '@mui/joy';
-
+import CategoryType from "./common/CategoryType";
+import CategoryNameList from "./common/CategoryNameList";
+import {deleteTransactionItembyId, getTransactionItemById, updateTransactionItemById} from '../api';
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 const EditTransaction = () => {
-    const [transactionDetails, setTransactionDetails] = useState([{ amount: '', category: '', date: '', notes: '' }]);
+    const location = useLocation();
+    const data = location.state;
+    const transactionID = data.id;
+    const [transactionDetails, setTransactionDetails] = useState([{transaction_id: '', type:'', transaction_date:'',category:'',notes:'',amount:'',username:'' }]);
+    const [transactionAmount, setTransactionAmount] = useState([]);
+    const [transactionCategory, setTransactionCategory] = useState([]);
+    const [transactionDate, setTransactionDate] = useState([]);
+    const [transactionNotes, setTransactionNotes] = useState([]);
+   
+    
     const navigate = useNavigate();
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("submit pressed");
-        if (transactionDetails[0].amount === "" || transactionDetails[0].category === "" || transactionDetails[0].date === "") {
-            console.log("required not fill up");
-        }
-        console.log(transactionDetails);
+    useEffect(()=>{
+        getTransactionItemById(transactionID)
+        .then((res)=>{
+            setTransactionDetails(res.data);
+            setTransactionAmount(res.data.amount);
+            setTransactionCategory(res.data.category);
+            setTransactionDate(res.data.transaction_date);
+            setTransactionNotes(res.data.notes);
+            
+        })
+        .catch((error)=>{
+            console.log(error);
+        });
 
+    },[]);
+
+    const handleAmountFormChange = (e) => {
+        setTransactionAmount(e.target.value);
     }
-
-    const handleFormChange = (e) => {
-        let data = transactionDetails;
-        console.log(e.target.name);
-        console.log(e.target.value);
-        data[e.target.name] = e.target.value;
-        setTransactionDetails(data);
-
+    const handleAmountDateChange = (e) => {
+        setTransactionDate(e.target.value);
+    }
+    const handleAmountNotesChange = (e) => {
+        setTransactionNotes(e.target.value);
     }
 
     const handleSelectChange = (e, newValue) => {
-        console.log("newValue", newValue);
-        let data = transactionDetails;
-        data["category"] = newValue;
-        setTransactionDetails(data);
+        setTransactionCategory(newValue);
 
     };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("submit pressed");
+        if(transactionAmount === "" || transactionDate === "")
+        {
+
+            if(transactionAmount === "" )
+            {
+                toast.error ("Amount is required");
+
+            }
+            if(transactionDate === "" )
+            {
+                toast.error ("Date of transaction is required");
+            }     
+        }
+        else{
+            var type = CategoryType(transactionCategory);
+            let data= transactionDetails;
+            data["amount"] = transactionAmount;
+            data["category"] = transactionCategory;
+            data["transaction_date"] = transactionDate;
+            data["notes"] = transactionNotes;
+            data["type"] = type;
+            setTransactionDetails(data);
+            updateTransactionItemById(transactionID, transactionDetails)
+            .then(()=>  successUpdate()
+    )
+        .catch((err) => {
+            toast.error(err);
+        });
+        }
+        
+    };
+
+    const handleDelete =()=>{
+        deleteTransactionItembyId(transactionID)
+        .then(()=>  successDeletion()
+        
+    )
+        .catch((err) => {
+            toast.error(err);
+        });
+    };
+    
+     const successDeletion =()=>
+    {
+        toast.success("transaction deleted")
+        navigate("/home");
+    }
+    const successUpdate =()=>
+    {
+        toast.success("transaction updated")
+        navigate("/home");
+    }
     const goBack= ()=>{
         navigate("/home");
      }
+
+
     return (
         <div>
             <TopBar banner="Edit Transaction" showAmount="false" />
-            <div className="add-transcation-container">
+            <div className="edit-transcation-container">
                 <FormControl >
                     <FormLabel sx={{ mt: 1 }}>Amount: </FormLabel>
                     <Input size="lg"
@@ -52,8 +126,8 @@ const EditTransaction = () => {
                         placeholder="Amount"
                         startDecorator={'SGD$'}
                         variant="soft"
-                        value={transactionDetails.amount}
-                        onChange={(e) => handleFormChange(e)}
+                        value={transactionAmount}
+                        onChange={(e) => handleAmountFormChange(e)}
                         required>
                     </Input>
                 </FormControl >
@@ -64,13 +138,12 @@ const EditTransaction = () => {
                         placeholder="Select Category..."
                         variant="soft"
                         name="category"
-                        value={transactionDetails.category}
+                        value={transactionCategory}
                         required>
-                        <Option value="Food" onClick={(e) => handleSelectChange(e, "Food")}> Food</Option>
-                        <Option value="Shopping" onClick={(e) => handleSelectChange(e, "Shopping")}> Shopping</Option>
-                        <Option value="Transport" onClick={(e) => handleSelectChange(e, "Transport")}> Transport</Option>
-                        <Option value="Personal Care" onClick={(e) => handleSelectChange(e, "Personal Care")}> Personal Care</Option>
-                        <Option value="Income" onClick={(e) => handleSelectChange(e, "Income")}> Income</Option>
+                       {CategoryNameList.map((categoryName)=> (
+                             <Option value={categoryName} onClick={(e) => handleSelectChange(e, categoryName)}> {categoryName}</Option>
+
+                        ))}
                     </Select>
                 </FormControl >
                 <FormControl>
@@ -80,8 +153,8 @@ const EditTransaction = () => {
                         type="date"
                         variant="soft"
                         name="date"
-                        value={transactionDetails.date}
-                        onChange={(e) => handleFormChange(e)}
+                        value={transactionDate}
+                        onChange={(e) => handleAmountDateChange(e)}
                         required>
                     </Input>
                 </FormControl>
@@ -92,13 +165,17 @@ const EditTransaction = () => {
                         type="text"
                         placeholder="notes"
                         name="notes"
-                        value={transactionDetails.notes}
-                        onChange={(e) => handleFormChange(e)}
+                        value={transactionNotes}
+                        onChange={(e) => handleAmountNotesChange(e)}
                         variant="soft">
                     </Input>
                 </FormControl>
-                <Button size="lg" variant="solid" sx={{ m: 2 }} onClick={(e) => handleSubmit(e)}>Save</Button>
-                <Button size="lg" variant="solid" sx={{ m: 2 }} onClick={() => goBack()}>Cancel</Button>
+                <Button size="lg" variant="solid" color="danger" sx={{ marginTop:2, marginBottom: 1 }} onClick={() => handleDelete()}>Delete</Button>
+                <div>
+                <Button size="lg" variant="solid" sx={{ marginRight: 1 }} onClick={(e) => handleSubmit(e)}>Save</Button>
+                <Button size="lg" variant="solid" sx={{ marginLeft: 1 }} onClick={() => goBack()}>Cancel</Button>
+                </div>
+                
 
 
             </div>
