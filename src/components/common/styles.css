@@ -37,6 +37,31 @@
     border-radius: 25px;
 
 }
+.login-helper{
+    height: 120px;
+    width: 300px;
+    margin-top: 100px;
+    text-align: center;
+    font-size: 16px;
+    background-color: #9196a3;
+    border-radius: 25px;
+    padding-top: 15px;
+}
+
+.register-text-container {
+    /* height and width sets the actual dimensons of the div */
+    height: 250px;
+    width: 300px;
+    /* marigin aligns the div to the middle of the screen*/
+    margin: auto;
+    text-align: center;
+    /* styles for the background of textfield */
+    background-color: #9196a3;
+    color: #ffffff;
+    padding: 5px 13px 5px;
+    border-radius: 25px;
+
+}
 
 /* Top Bar styles */
 .top-bar {

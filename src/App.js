@@ -5,11 +5,11 @@ import {
   Route,
 } from "react-router-dom";
 import Login from './components/Login';
+import RegisterPage from './components/RegisterPage';
 import HomePage from './components/HomePage';
 import AddTransaction from './components/AddTransaction';
 import EditTransaction from './components/EditTransaction';
 import AnalysisPage from './components/AnalysisPage';
-import CategoryAnalysis from './components/common/CategoryAnalysis';
 import ErrorPage from './components/ErrorPage';
 import { ToastContainer } from 'react-toastify';
 
@@ -27,6 +27,10 @@ function App() {
                     <Route
                         path="/home"
                         element={<HomePage />}
+                    />
+                    <Route
+                        path="/register"
+                        element={<RegisterPage />}
                     />
                     <Route
                         path="/addtransaction"
