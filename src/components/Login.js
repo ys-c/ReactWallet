@@ -21,10 +21,9 @@ const Login = ({ setAccessToken, setRefreshToken }) => {
         }
         else {
             const userCredentials = { "username": username, "password": password };
-            console.log(userCredentials);
             login(userCredentials)
                 .then((res) => {
-                    console.log(res.data);
+                    //console.log(res.data);
                     setAccessToken({ token: res.data["accessToken"] });
                     setRefreshToken({ token: res.data["refreshToken"] });
                     navigate("/home");

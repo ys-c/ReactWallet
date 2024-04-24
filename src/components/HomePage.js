@@ -30,11 +30,12 @@ const HomePage = (props) =>{
 
     return(
         <div>
-            <TopBar banner={TotalBalance} showAmount="true" showLogOut="true" handleLogout ={handleLogout} />
-            {TransactionList.map((transactionRecord) => (
-            <TransactionItem transactionDetails = {transactionRecord}/>
+            <TopBar mainBanner={"$"+TotalBalance} subBanner="Final Balance" showLogOut="true" handleLogout={handleLogout} />
+            <div className="middle-homepage-container">
+            {TransactionList.map((transactionRecord, index) => (
+            <TransactionItem key={index} transactionDetails = {transactionRecord}/>
             ))}
-            
+            </div>
 
             <BottomBar/>
         </div>

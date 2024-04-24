@@ -12,7 +12,6 @@ const AddTransaction = () => {
     const navigate = useNavigate();
     const handleSubmit = (e) =>{
         e.preventDefault();
-        console.log("submit pressed"); 
         if(transactionDetails[0].amount === "" || transactionDetails[0].category === "" || transactionDetails[0].transaction_date === "")
         {
 
@@ -36,7 +35,7 @@ const AddTransaction = () => {
         let data = transactionDetails;
         data[0]["type"] = type;
         setTransactionDetails(data);
-        console.log(transactionDetails);
+        // console.log(transactionDetails);
         createTransactionItem(transactionDetails[0])
         .then(()=>  successCreation()
         
@@ -55,15 +54,15 @@ const AddTransaction = () => {
     
       const handleFormChange = (e) =>{
         let data = transactionDetails;
-        console.log(e.target.name );
-        console.log(e.target.value);
+        // console.log(e.target.name );
+        // console.log(e.target.value);
         data[0][e.target.name] = e.target.value;
         setTransactionDetails(data);
         
     }
 
     const handleSelectChange =(e,newValue) =>{
-        console.log("newValue", newValue);
+        // console.log("newValue", newValue);
         let data = transactionDetails;
         data[0]["category"] = newValue;
         setTransactionDetails(data);
@@ -75,7 +74,7 @@ const AddTransaction = () => {
 
     return (
         <div>
-            <TopBar banner="Add Transaction" showAmount ="false" showLogOut="false"/>
+            <TopBar mainBanner="Add Transaction" subBanner="" showLogOut="false" />
             <div className="add-transcation-container">
                 <FormControl >
                     <FormLabel sx={{mt: 1}}>Amount: </FormLabel>

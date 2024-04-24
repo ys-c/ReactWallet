@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 const TopBar = (props) => {
-    const banner= props.banner;
-    const showAmount = props.showAmount;
+    const mainBanner= props.mainBanner;
+    const subBanner = props.subBanner;
     const showLogOut = props.showLogOut;
     const handleLogout= props.handleLogout;
     const navigate = useNavigate();
@@ -22,11 +22,8 @@ const TopBar = (props) => {
             {
                 showLogOut === 'true' ? <div className='logout-button'><IconButton variant="outlined" onClick={()=>exit()} > <LogoutIcon color="info" style={{ fontSize: 40 }} /></IconButton></div> : ""
             }
-
-            {
-                showAmount === 'true' ?  <h2> Final Balance: </h2> : ""
-            }
-            <h1>{banner}</h1>
+            <h2>{subBanner}</h2>
+            <h1>{mainBanner}</h1>
         </div>
 
     );

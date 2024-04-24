@@ -1,15 +1,20 @@
 import { getTotalBalance, getAllCategoryExpenses } from "../api";
+import {Button } from '@mui/joy';
 import { useEffect, useState } from "react";
 import { PieChart } from "react-minimal-pie-chart";
-import CategoryAnalysis from "./common/CategoryAnalysis";
+import { useNavigate} from "react-router-dom"
+import CategoryItemDisplay from "./common/CategoryItemDisplay";
 import CategoryColor from "./common/CategoryColor";
 import TopBar from "./common/TopBar";
 import BottomBar from "./common/BottomBar";
+import Spinner from 'react-bootstrap/Spinner';
 const AnalysisPage = (props) => {
     const handleLogout = props.handleLogout;
     const [TotalBalance, setTotalBalance] = useState('');
     const [categoryList, setCategoryList] = useState([]);
     const [pieChartData, setPieChartData] = useState([{ title: '', value: '', color: '' }]);
+    const [dataLoaded, setDataLoaded] = useState(false);
+    const navigate = useNavigate();
     useEffect(() => {
         getTotalBalance()
             .then((res) => {
@@ -30,6 +35,7 @@ const AnalysisPage = (props) => {
                     dataArray.push(data);
                 });
                 setPieChartData(dataArray);
+                setDataLoaded(true);
             })
             .catch((error) => {
                 console.log(error);
@@ -45,10 +51,18 @@ const AnalysisPage = (props) => {
         return expense;
     }
 
+    const goCategoryAnalytics=(categoryName, categoryAmount) =>{
+
+        const data= {category: categoryName, amount: categoryAmount};
+        navigate("/categoryanalysis", {state: data});
+
+    };
+
     return (
         <div>
-            <TopBar banner={TotalBalance} showAmount="true" showLogOut="true" handleLogout ={handleLogout}/>
-            <div className="piechart-container">
+            <TopBar mainBanner={"$"+TotalBalance} subBanner="Final Balance" showLogOut="true" handleLogout={handleLogout} />
+            {
+                dataLoaded ? (<div className="piechart-container">
                 <div id="piechart-total-expenses">
                     Total Expenses: ${calculateTotalExpenses()}
 
@@ -67,13 +81,16 @@ const AnalysisPage = (props) => {
                         fontFamily: 'sans-serif',
                     })}
 
-                />;
+                />
 
-            </div>
+            </div>): (<Spinner animation="border" />)
+            }
+            
             <div className="category-analysis-container">
-                {categoryList.map((categoryItem) => (
-                    <CategoryAnalysis icon={categoryItem.category} amount={categoryItem.amount} />
-
+                {categoryList.map((categoryItem, index) => (
+                    <Button variant="plain" style={{width: '100%'}} onClick={()=> goCategoryAnalytics(categoryItem.category,categoryItem.amount )}>
+                    <CategoryItemDisplay key={index} icon={categoryItem.category} amount={categoryItem.amount} />
+                    </Button>
                 ))}
 
 

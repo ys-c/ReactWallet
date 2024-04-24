@@ -51,7 +51,7 @@ const EditTransaction = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("submit pressed");
+        // console.log("submit pressed");
         if(transactionAmount === "" || transactionDate === "")
         {
 
@@ -111,7 +111,7 @@ const EditTransaction = () => {
 
     return (
         <div>
-            <TopBar banner="Edit Transaction" showAmount="false" showLogOut="false"/>
+            <TopBar mainBanner="Edit Transaction" subBanner="" showLogOut="false" />
             <div className="edit-transcation-container">
                 <FormControl >
                     <FormLabel sx={{ mt: 1 }}>Amount: </FormLabel>

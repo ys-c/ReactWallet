@@ -1,7 +1,7 @@
 import CategoryIcon from "./CategoryIcon";
 import CategoryColor from "./CategoryColor";
 import ColoredLine from "./ColoredLine";
-const CategoryAnalysis = (props) => {
+const CategoryItemDisplay = (props) => {
   const category = props.icon;
   const amount = props.amount;
 
@@ -22,5 +22,5 @@ const CategoryAnalysis = (props) => {
     </div>
   )
 };
-export default CategoryAnalysis;
+export default CategoryItemDisplay;
 

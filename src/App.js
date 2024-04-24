@@ -3,7 +3,6 @@ import {
     BrowserRouter as Router,
     Routes,
     Route,
-    redirect,
 } from "react-router-dom";
 import Login from './components/Login';
 import RegisterPage from './components/RegisterPage';
@@ -13,6 +12,7 @@ import EditTransaction from './components/EditTransaction';
 import AnalysisPage from './components/AnalysisPage';
 import ErrorPage from './components/ErrorPage';
 import NotAuthorized from './components/NotAuthorized';
+import CategoryAnalytics from './components/CategoryAnalytics';
 import { ToastContainer } from 'react-toastify';
 import useAccessToken from './hooks/useAccessToken';
 import useRefreshToken from './hooks/useRefreshToken.';
@@ -37,11 +37,10 @@ function App() {
     };
 
     const checkAuth = () =>{
-        console.log("checkAuth: ");
-        console.log("accessToken: ", accessToken);
+        // console.log("accessToken: ", accessToken);
         verifyUserAuth(accessToken)
         .then((res)=>{
-            console.log(res.data);
+            // console.log(res.data);
             setUserAuth(res.data);
            
         })
@@ -110,6 +109,10 @@ function App() {
                     <Route
                         path="/analysis"
                         element={ userAuth !== null ? (<AnalysisPage handleLogout ={handleLogout}/> ) : (<NotAuthorized/>)}
+                    />
+                     <Route
+                        path="/categoryanalysis"
+                        element={ userAuth !== null ? (<CategoryAnalytics handleLogout ={handleLogout}/> ) : (<NotAuthorized/>)}
                     />
                     <Route
                         path="*"
