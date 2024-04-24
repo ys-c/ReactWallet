@@ -42,7 +42,7 @@ const AddTransaction = () => {
         
     )
         .catch((err) => {
-            toast.error(err);
+            toast.error(err.response.data.message);
         });
     }
         
@@ -75,7 +75,7 @@ const AddTransaction = () => {
 
     return (
         <div>
-            <TopBar banner="Add Transaction" showAmount ="false" />
+            <TopBar banner="Add Transaction" showAmount ="false" showLogOut="false"/>
             <div className="add-transcation-container">
                 <FormControl >
                     <FormLabel sx={{mt: 1}}>Amount: </FormLabel>

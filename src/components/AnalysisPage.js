@@ -5,7 +5,8 @@ import CategoryAnalysis from "./common/CategoryAnalysis";
 import CategoryColor from "./common/CategoryColor";
 import TopBar from "./common/TopBar";
 import BottomBar from "./common/BottomBar";
-const AnalysisPage = () => {
+const AnalysisPage = (props) => {
+    const handleLogout = props.handleLogout;
     const [TotalBalance, setTotalBalance] = useState('');
     const [categoryList, setCategoryList] = useState([]);
     const [pieChartData, setPieChartData] = useState([{ title: '', value: '', color: '' }]);
@@ -46,7 +47,7 @@ const AnalysisPage = () => {
 
     return (
         <div>
-            <TopBar banner={TotalBalance} showAmount="true" />
+            <TopBar banner={TotalBalance} showAmount="true" showLogOut="true" handleLogout ={handleLogout}/>
             <div className="piechart-container">
                 <div id="piechart-total-expenses">
                     Total Expenses: ${calculateTotalExpenses()}

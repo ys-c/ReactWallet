@@ -3,7 +3,8 @@ import BottomBar from "./common/BottomBar";
 import TransactionItem from "./common/TransactionItem";
 import { useEffect, useState } from "react";
 import { getAllTransactionItem, getTotalBalance } from "../api";
-const HomePage = () =>{
+const HomePage = (props) =>{
+    const handleLogout = props.handleLogout;
     const [TransactionList, setTransactionList ] = useState([{transaction_id: '', type:'', transaction_date:'',category:'',notes:'',amount:'' }]);
     const [TotalBalance, setTotalBalance] = useState('');
     useEffect(() => {
@@ -29,7 +30,7 @@ const HomePage = () =>{
 
     return(
         <div>
-            <TopBar banner={TotalBalance} showAmount="true"/>
+            <TopBar banner={TotalBalance} showAmount="true" showLogOut="true" handleLogout ={handleLogout} />
             {TransactionList.map((transactionRecord) => (
             <TransactionItem transactionDetails = {transactionRecord}/>
             ))}

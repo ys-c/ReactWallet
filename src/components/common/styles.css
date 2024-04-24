@@ -72,6 +72,10 @@
     color: white;
     font-size: 20px;
 }
+.logout-button{
+    position: absolute;
+    right: 0;
+}
 
 /* Bottom Bar styles */
 .bottom-bar {

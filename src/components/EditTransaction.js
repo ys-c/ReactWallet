@@ -78,7 +78,7 @@ const EditTransaction = () => {
             .then(()=>  successUpdate()
     )
         .catch((err) => {
-            toast.error(err);
+            toast.error(err.response.data.message);
         });
         }
         
@@ -90,7 +90,7 @@ const EditTransaction = () => {
         
     )
         .catch((err) => {
-            toast.error(err);
+            toast.error(err.response.data.message);
         });
     };
     
@@ -111,7 +111,7 @@ const EditTransaction = () => {
 
     return (
         <div>
-            <TopBar banner="Edit Transaction" showAmount="false" />
+            <TopBar banner="Edit Transaction" showAmount="false" showLogOut="false"/>
             <div className="edit-transcation-container">
                 <FormControl >
                     <FormLabel sx={{ mt: 1 }}>Amount: </FormLabel>

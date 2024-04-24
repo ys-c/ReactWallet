@@ -17,9 +17,9 @@ const BottomBar = () => {
     }
     return (
         <div className='bottom-bar'>
-            <IconButton className='bottom-bar-button' variant="outlined" size='large' onClick={() => goHome()}> <HomeIcon /></IconButton>
-            <IconButton className='bottom-bar-button' variant="outlined" size='large' onClick={() => goAddTransaction()}> <AddCircleIcon /></IconButton>
-            <IconButton className='bottom-bar-button' variant="outlined" size='large' onClick={() => goSettings()}> <AnalyticsIcon /></IconButton>
+            <IconButton className='bottom-bar-button' variant="outlined" size='large' onClick={() => goHome()}> <HomeIcon color="info" style={{ fontSize: 40 }} /></IconButton>
+            <IconButton className='bottom-bar-button' variant="outlined" size='large' onClick={() => goAddTransaction()}> <AddCircleIcon color="info" style={{ fontSize: 40 }} /></IconButton>
+            <IconButton className='bottom-bar-button' variant="outlined" size='large' onClick={() => goSettings()}> <AnalyticsIcon color="info" style={{ fontSize: 40 }} /></IconButton>
         </div>
     );
 }
