@@ -8,6 +8,7 @@ const TransactionItem = (props) => {
     let notes = transactionDetails.notes;
     let amount = transactionDetails.amount;
     let type = transactionDetails.type;
+    let date = transactionDetails.transaction_date;
     const data= {id: transactionDetails.transaction_id};
     const navigate = useNavigate();
     const goEdit = () => {
@@ -21,6 +22,9 @@ const TransactionItem = (props) => {
                     {CategoryIcon(category)}
                 </div>
                 <div className='transcation-item-middle-container'>
+                    <div id='date'>
+                        {date}
+                    </div>
                     <div id='category-name'>
                         {category}
                           </div>

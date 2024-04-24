@@ -88,7 +88,7 @@ const AnalysisPage = (props) => {
             
             <div className="category-analysis-container">
                 {categoryList.map((categoryItem, index) => (
-                    <Button variant="plain" style={{width: '100%'}} onClick={()=> goCategoryAnalytics(categoryItem.category,categoryItem.amount )}>
+                    <Button key={index} variant="plain" style={{width: '100%'}} onClick={()=> goCategoryAnalytics(categoryItem.category,categoryItem.amount )}>
                     <CategoryItemDisplay key={index} icon={categoryItem.category} amount={categoryItem.amount} />
                     </Button>
                 ))}

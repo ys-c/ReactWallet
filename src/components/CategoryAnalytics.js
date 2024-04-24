@@ -16,6 +16,7 @@ const CategoryAnalytics = (props) => {
     .then((res)=>{
         let data = res.data;
         const FilterByCategory  = data.filter(item => item.category === category)
+        FilterByCategory.sort((a,b)=> new Date(b.transaction_date)- new Date(a.transaction_date));
         setTransactionList(FilterByCategory);
         
     })

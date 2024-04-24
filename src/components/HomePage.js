@@ -18,7 +18,9 @@ const HomePage = (props) =>{
         });
         getAllTransactionItem()
         .then((res) => {
-            setTransactionList(res.data);
+            let data= res.data;
+            data.sort((a,b)=> new Date(b.transaction_date)- new Date(a.transaction_date));
+            setTransactionList(data);
         })
         .catch((error) =>
         {

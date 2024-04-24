@@ -150,7 +150,7 @@
 }
 
 #category-name {
-    height: 50%;
+    height: 40%;
     font-size: 30px;
     color: white;
     font-weight: 700;
@@ -163,6 +163,16 @@
 #notes {
     height: 50%;
     font-size: 25px;
+    color: black;
+    font-weight: 400;
+    /* border-style: solid; */
+}
+
+#date {
+    position: relative;
+    font-size: 24px;
+    color:white;
+    font-weight: 500;
     /* border-style: solid; */
 }
 
