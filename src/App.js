@@ -65,9 +65,7 @@ function App() {
         useEffect(checkAuth, [accessToken]);
 
         const handleLogout = () => {
-            console.log("handlelogout");
             let payload = {token :refreshToken};
-            console.log(payload);
             logout(payload)
             .then((res) => {
                 clearTokens();

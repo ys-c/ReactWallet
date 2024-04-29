@@ -13,7 +13,7 @@ const AnalysisPage = (props) => {
     const [TotalBalance, setTotalBalance] = useState('');
     const [categoryList, setCategoryList] = useState([]);
     const [pieChartData, setPieChartData] = useState([{ title: '', value: '', color: '' }]);
-    const [dataLoaded, setDataLoaded] = useState(false);
+    const [emptyTransaction, setEmptyTransaction] = useState(true);
     const navigate = useNavigate();
     useEffect(() => {
         getTotalBalance()
@@ -25,6 +25,9 @@ const AnalysisPage = (props) => {
             });
         getAllCategoryExpenses()
             .then((res) => {
+                if(res.data.length>0){
+                    setEmptyTransaction(false);
+                }
                 setCategoryList(res.data);
                 var dataArray = [];
                 res.data.forEach((item) => {
@@ -35,7 +38,6 @@ const AnalysisPage = (props) => {
                     dataArray.push(data);
                 });
                 setPieChartData(dataArray);
-                setDataLoaded(true);
             })
             .catch((error) => {
                 console.log(error);
@@ -62,7 +64,7 @@ const AnalysisPage = (props) => {
         <div>
             <TopBar mainBanner={"$"+TotalBalance} subBanner="Final Balance" showLogOut="true" handleLogout={handleLogout} />
             {
-                dataLoaded ? (<div className="piechart-container">
+                emptyTransaction ?( <div className= "empty-transaction-container"> <h3>No transactions to analyse!</h3> Click the add button at the bottom to log transactions</div>) : (<div className="piechart-container">
                 <div id="piechart-total-expenses">
                     Total Expenses: ${calculateTotalExpenses()}
 
@@ -83,7 +85,7 @@ const AnalysisPage = (props) => {
 
                 />
 
-            </div>): (<Spinner animation="border" />)
+            </div>) 
             }
             
             <div className="category-analysis-container">

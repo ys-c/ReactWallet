@@ -9,7 +9,19 @@
     padding-bottom: 70px;
 }
 
-
+.empty-transaction-container{
+    height: 210px;
+    width: 35%;
+    background-color: #9196a3;
+    border-radius: 17px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    font-weight: 600;
+}
 /* Error Page Styles */
 .error-page-container {
     /* positioning */

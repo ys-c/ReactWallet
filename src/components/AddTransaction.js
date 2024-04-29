@@ -103,7 +103,7 @@ const AddTransaction = () => {
                         value={transactionDetails.category}
                         required>
                         {CategoryNameList.map((categoryName)=> (
-                             <Option value={categoryName} onClick={(e) => handleSelectChange(e, categoryName)}> {categoryName}</Option>
+                             <Option value={categoryName} key={categoryName} onClick={(e) => handleSelectChange(e, categoryName)}> {categoryName}</Option>
 
                         ))}
                     </Select>
