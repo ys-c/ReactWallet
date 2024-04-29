@@ -7,7 +7,6 @@ import CategoryItemDisplay from "./common/CategoryItemDisplay";
 import CategoryColor from "./common/CategoryColor";
 import TopBar from "./common/TopBar";
 import BottomBar from "./common/BottomBar";
-import Spinner from 'react-bootstrap/Spinner';
 const AnalysisPage = (props) => {
     const handleLogout = props.handleLogout;
     const [TotalBalance, setTotalBalance] = useState('');
